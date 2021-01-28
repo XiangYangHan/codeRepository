@@ -12,14 +12,25 @@ public class DiagonalTraversal {
 
     public static void main(String[] args) {
         DiagonalTraversal diagonalTraversal = new DiagonalTraversal();
-        int[][] matrix = new int[][]{{1, 2, 3,}, {4, 5, 6,}, {7, 8, 9},};
+        int[][] matrix = new int[][]{{1, 2, }, {4, 5, }, {7, 8, },};
+        System.out.println(Arrays.toString(diagonalTraversal.findDiagonalOrder(matrix)));
+        matrix = new int[][]{};
+        System.out.println(Arrays.toString(diagonalTraversal.findDiagonalOrder(matrix)));
+        matrix = new int[][]{{}};
         System.out.println(Arrays.toString(diagonalTraversal.findDiagonalOrder(matrix)));
     }
 
     public int[] findDiagonalOrder(int[][] matrix) {
+        int[] result = {};
         int row = matrix.length;
+        if (row == 0) {
+            return result;
+        }
         int col = matrix[0].length;
-        int[] result = new int[row * col];
+        if (col == 0) {
+            return result;
+        }
+        result = new int[row * col];
 
         int i = 0, j = 0;
         Direction direction = Direction.RT;
