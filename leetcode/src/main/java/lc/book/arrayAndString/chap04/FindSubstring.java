@@ -55,7 +55,7 @@ public class FindSubstring {
             } else if (needleIndex == 0) {
                 haystackIndex++;
             } else {
-                needleIndex = sameHeadTailLength[needleIndex - 1];
+                needleIndex = sameHeadTailLength[needleIndex - 1]; // 前边已匹配子串的最大前缀后缀长度
             }
         }
         if (needleIndex == needleChars.length) {
