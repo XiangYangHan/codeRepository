@@ -32,6 +32,7 @@ public class FindSubstring {
         System.out.println(instance.strStr("abcd", "abcde"));
         System.out.println(instance.strStr("aaaaa", "a"));
         System.out.println(instance.strStr("aaaaa", "ab"));
+        System.out.println(instance.strStr("aabaaabaaac", "aabaaac"));
     }
 
 
@@ -72,6 +73,17 @@ public class FindSubstring {
             int prevCharSameLength = prefixSuffixSameLength[i - 1];
             if (needleChar == needleChars[prevCharSameLength]) {
                 prefixSuffixSameLength[i] = prevCharSameLength + 1;
+            } else {
+                boolean prefixCharAllSame = true; // fix: "aabaaa" => [0,1,0,1,2,2]
+                for (int j = 0; j < prevCharSameLength; j++) {
+                    if (needleChars[j] != needleChar) {
+                        prefixCharAllSame = false;
+                        break;
+                    }
+                }
+                if (prefixCharAllSame) {
+                    prefixSuffixSameLength[i] = prevCharSameLength;
+                }
             }
         }
         return prefixSuffixSameLength;
