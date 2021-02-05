@@ -125,9 +125,13 @@ public class FindSubstring {
             if (k == -1 || needle.charAt(k) == needle.charAt(j)) {
                 j++;
                 k++;
-                // 查找时needleChars[j]处发生失配后，模式串要回滚到next[j]处做匹配
-                // 此处所隐含的意思是在模式串中 [0...k-1] <==> [j-k...j-1] 相同
-                next[j] = k;
+                if (needle.charAt(j) == needle.charAt(k)) {
+                    next[j] = next[k];
+                } else {
+                    // 查找时needleChars[j]处发生失配后，模式串要回滚到next[j]处做匹配
+                    // 此处所隐含的意思是在模式串中 [0...k-1] <==> [j-k...j-1] 相同
+                    next[j] = k;
+                }
             } else {
                 k = next[k];
             }
