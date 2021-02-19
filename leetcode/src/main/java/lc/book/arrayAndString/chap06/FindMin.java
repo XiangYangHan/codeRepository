@@ -14,6 +14,14 @@ public class FindMin {
         System.out.println(instance.findMin(nums));
         nums = new int[]{4, 5, 6, 7, 0, 1, 2};
         System.out.println(instance.findMin(nums));
+        nums = new int[]{0};
+        System.out.println(instance.findMin(nums));
+        nums = new int[]{1,2};
+        System.out.println(instance.findMin(nums));
+        nums = new int[]{1,2,3};
+        System.out.println(instance.findMin(nums));
+        nums = new int[]{2,1};
+        System.out.println(instance.findMin(nums));
     }
 
     public int findMin(int[] nums) {
