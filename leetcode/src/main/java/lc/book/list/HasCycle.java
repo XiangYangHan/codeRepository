@@ -1,7 +1,5 @@
 package lc.book.list;
 
-import java.util.Objects;
-
 public class HasCycle {
 
     public static void main(String[] args) {
@@ -12,18 +10,18 @@ public class HasCycle {
     }
 
     public boolean hasCycle(ListNode head) {
-        boolean result = false;
-        ListNode f = head;
+        if (head == null) {
+            return false;
+        }
         ListNode s = head;
-        while (Objects.nonNull(f) && Objects.nonNull(f.next)) {
-            f = f.next.next;
+        ListNode f = head.next;
+        while (f != null && f.next != null) {
             s = s.next;
-            if (Objects.equals(s, f)) {
-                result = true;
+            f = f.next.next;
+            if (s == f) {
                 break;
             }
         }
-
-        return result;
+        return s == f;
     }
 }
