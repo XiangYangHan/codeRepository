@@ -4,6 +4,9 @@ public class HasCycle {
 
     public static void main(String[] args) {
         HasCycle instance = new HasCycle();
+        System.out.println(instance.hasCycle(ListNode.generateCycleList(new int[]{}, -1)));
+        System.out.println(instance.hasCycle(ListNode.generateCycleList(new int[]{3}, -1)));
+        System.out.println(instance.hasCycle(ListNode.generateCycleList(new int[]{3}, 0)));
         System.out.println(instance.hasCycle(ListNode.generateCycleList(new int[]{3, 2, 0, -4}, -1)));
         System.out.println(instance.hasCycle(ListNode.generateCycleList(new int[]{3, 2, 0, -4}, 0)));
         System.out.println(instance.hasCycle(ListNode.generateCycleList(new int[]{3, 2, 0, -4}, 1)));
@@ -14,7 +17,7 @@ public class HasCycle {
             return false;
         }
         ListNode s = head;
-        ListNode f = head.next;
+        ListNode f = head;
         while (f != null && f.next != null) {
             s = s.next;
             f = f.next.next;
