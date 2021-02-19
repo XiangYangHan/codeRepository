@@ -4,14 +4,11 @@ import java.util.Objects;
 
 public class HasCycle {
 
-    class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
+    public static void main(String[] args) {
+        HasCycle instance = new HasCycle();
+        System.out.println(instance.hasCycle(ListNode.generateCycleList(new int[]{3, 2, 0, -4}, -1)));
+        System.out.println(instance.hasCycle(ListNode.generateCycleList(new int[]{3, 2, 0, -4}, 0)));
+        System.out.println(instance.hasCycle(ListNode.generateCycleList(new int[]{3, 2, 0, -4}, 1)));
     }
 
     public boolean hasCycle(ListNode head) {
