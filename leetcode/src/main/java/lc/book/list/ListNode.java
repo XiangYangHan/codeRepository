@@ -1,5 +1,8 @@
 package lc.book.list;
 
+import java.util.HashSet;
+import java.util.Set;
+
 class ListNode {
     int val;
     ListNode next;
@@ -10,6 +13,15 @@ class ListNode {
     }
 
     public ListNode() {
+    }
+
+    public ListNode(int val, ListNode next) {
+        this.val = val;
+        this.next = next;
+    }
+
+    public static ListNode generateNoneCycleList(int[] arr) {
+        return generateCycleList(arr, -1);
     }
 
     /**
@@ -38,6 +50,40 @@ class ListNode {
             p.next = entrance;
         }
         return head;
+    }
+
+    public static void printList(ListNode head) {
+        Set<ListNode> set = new HashSet<>();
+        StringBuilder sb = new StringBuilder();
+        ListNode p = head;
+        while (p != null) {
+            if (set.add(p)) {
+                sb.append(",").append(p.val);
+                set.add(p);
+                p = p.next;
+            } else {
+                sb.append(",...").append(p.val);
+                break;
+            }
+        }
+
+        if (sb.length() > 0) {
+            System.out.println("[" + sb.substring(1) + "]");
+        } else {
+            System.out.println("[]");
+        }
+    }
+
+    public static void main(String[] args) {
+        printList(generateCycleList(new int[]{1}, 0));
+        printList(generateCycleList(new int[]{1,2}, 0));
+        printList(generateCycleList(new int[]{1,2,3}, 1));
+        printList(generateCycleList(new int[]{1,2,3,4}, 3));
+        printList(generateNoneCycleList(new int[]{}));
+        printList(generateNoneCycleList(new int[]{1}));
+        printList(generateNoneCycleList(new int[]{1,2}));
+        printList(generateNoneCycleList(new int[]{1,2,3}));
+        printList(generateNoneCycleList(new int[]{1,2,3,4}));
     }
 
     @Override
