@@ -40,12 +40,13 @@ public class MyLinkedList {
     /** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
     public void addAtHead(int val) {
         Node node = new Node(val);
-        node.next = head;
+        if (size == 0) {
+            tail = node;
+        } else {
+            node.next = head;
+        }
         head = node;
         size++;
-        if (size == 1) {
-            tail = node;
-        }
     }
 
     /** Append a node of value val to the last element of the linked list. */
@@ -64,8 +65,7 @@ public class MyLinkedList {
     public void addAtIndex(int index, int val) {
         if (index > size) {
             return;
-        }
-        if (index <= 0) {
+        } else if (index <= 0) {
             addAtHead(val);
         } else if (index == size) {
             addAtTail(val);
@@ -89,10 +89,8 @@ public class MyLinkedList {
         if (size == 1) {
             head = null;
             tail = null;
-            size = 0;
         } else if (index == 0) {
             head = head.next;
-            size--;
         } else {
             Node p = head;
             for (int i = 0; i < index - 1; i++) {
@@ -104,7 +102,7 @@ public class MyLinkedList {
             } else {
                 p.next = p.next.next;
             }
-            size--;
         }
+        size--;
     }
 }
