@@ -4,7 +4,7 @@ public class MyLinkedList {
 
     static class Node{
         private int val;
-        private Node next;
+        private Node next, prev;
 
         public Node() { }
 
@@ -44,6 +44,7 @@ public class MyLinkedList {
             tail = node;
         } else {
             node.next = head;
+            head.prev = node;
         }
         head = node;
         size++;
@@ -56,6 +57,7 @@ public class MyLinkedList {
         } else {
             Node node = new Node(val);
             tail.next = node;
+            node.prev = tail;
             tail = node;
             size++;
         }
@@ -76,6 +78,8 @@ public class MyLinkedList {
             }
             Node node = new Node(val);
             node.next = p.next;
+            node.prev = p;
+            p.next.prev = node;
             p.next = node;
             size++;
         }
@@ -91,17 +95,19 @@ public class MyLinkedList {
             tail = null;
         } else if (index == 0) {
             head = head.next;
-        } else {
+            head.prev.next = null;
+            head.prev = null;
+        } else if (index == size - 1){
+            tail = tail.prev;
+            tail.next.prev = null;
+            tail.next = null;
+        } else  {
             Node p = head;
-            for (int i = 0; i < index - 1; i++) {
+            for (int i = 0; i < index; i++) {
                 p = p.next;
             }
-            if (p.next == tail) {
-                p.next = null;
-                tail = p;
-            } else {
-                p.next = p.next.next;
-            }
+            p.prev.next = p.next;
+            p.next.prev = p.prev;
         }
         size--;
     }
