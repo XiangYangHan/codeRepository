@@ -26,11 +26,12 @@ class ListNode {
 
     /**
      * 构建一个链表，pos指示环入口元素索引
+     *
      * @param arr 元素序列
      * @param pos 环入口索引
      * @return
      */
-    public static ListNode generateCycleList (int[] arr, int pos) {
+    public static ListNode generateCycleList(int[] arr, int pos) {
         if (arr == null || arr.length == 0) {
             return null;
         }
@@ -74,16 +75,32 @@ class ListNode {
         }
     }
 
+    public static ListNode reverseList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode p = head;
+        ListNode next = head.next;
+        while (next != null) {
+            head.next = next.next;
+            next.next = p;
+            p = next;
+            next = head.next;
+        }
+        head.next = null;
+        return p;
+    }
+
     public static void main(String[] args) {
         printList(generateCycleList(new int[]{1}, 0));
-        printList(generateCycleList(new int[]{1,2}, 0));
-        printList(generateCycleList(new int[]{1,2,3}, 1));
-        printList(generateCycleList(new int[]{1,2,3,4}, 3));
-        printList(generateNoneCycleList(new int[]{}));
-        printList(generateNoneCycleList(new int[]{1}));
-        printList(generateNoneCycleList(new int[]{1,2}));
-        printList(generateNoneCycleList(new int[]{1,2,3}));
-        printList(generateNoneCycleList(new int[]{1,2,3,4}));
+        printList(generateCycleList(new int[]{1, 2}, 0));
+        printList(generateCycleList(new int[]{1, 2, 3}, 1));
+        printList(generateCycleList(new int[]{1, 2, 3, 4}, 3));
+        printList(reverseList(generateNoneCycleList(new int[]{})));
+        printList(reverseList(generateNoneCycleList(new int[]{1})));
+        printList(reverseList(generateNoneCycleList(new int[]{1, 2})));
+        printList(reverseList(generateNoneCycleList(new int[]{1, 2, 3})));
+        printList(reverseList(generateNoneCycleList(new int[]{1, 2, 3, 4})));
     }
 
     @Override
