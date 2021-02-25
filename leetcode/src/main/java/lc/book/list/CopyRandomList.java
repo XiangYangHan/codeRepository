@@ -18,37 +18,20 @@ public class CopyRandomList {
     }
 
     public Node copyRandomList(Node head) {
-        if (head == null) {
-            return null;
-        }
-
-        int count = 0;
+        Map<Node, Node> map = new HashMap<>();
         Node p = head;
         while (p != null) {
+            map.put(p, new Node(p.val));
             p = p.next;
-            count++;
         }
-
-        Map<Node, Integer> indexMap = new HashMap<>();
-        Node[] copy = new Node[count];
         p = head;
-        for (int i = 0; i < count; i++) {
-            Node node = new Node(p.val);
-            copy[i] = node;
-            if (i > 0) {
-                copy[i - 1].next = node;
-            }
-            indexMap.put(p, i);
+        while (p != null) {
+            Node copy = map.get(p);
+            copy.next = map.get(p.next);
+            copy.random = map.get(p.random);
             p = p.next;
         }
-
-        p = head;
-        for (int i = 0; i < count; i++) {
-            if (p.random != null) {
-                copy[i].random = copy[indexMap.get(p.random)];
-            }
-            p = p.next;
-        }
-        return copy[0];
+        return map.get(head);
     }
+
 }
