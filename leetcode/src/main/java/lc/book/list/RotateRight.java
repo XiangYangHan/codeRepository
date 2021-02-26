@@ -38,20 +38,13 @@ public class RotateRight {
             return head;
         }
 
-        ListNode s = head;
-        p = head;
-        int i = 1;
-        while (p.next != null) {
-            p = p.next;
-            if (i > k) {
-                s = s.next;
-            }
-            i++;
-        }
-
         p.next = head;
-        head = s.next;
-        s.next = null;
+        count -= k;
+        for (int i = 0; i < count; i++) {
+            p = p.next;
+        }
+        head = p.next;
+        p.next = null;
 
         return head;
     }
