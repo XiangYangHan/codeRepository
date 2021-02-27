@@ -1,27 +1,36 @@
 package lc.book.queueAndStack;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 public class MovingAverage {
 
-    private Queue<Integer> data;
-    private int count;
+    public static void main(String[] args) {
+        MovingAverage movingAverage = new MovingAverage(3);
+        System.out.println(movingAverage.next(1));
+        System.out.println(movingAverage.next(10));
+        System.out.println(movingAverage.next(3));
+        System.out.println(movingAverage.next(5));
+    }
 
+    private int[] data;
+    private int head;
     private int sum;
+    private int count;
 
     /** Initialize your data structure here. */
     public MovingAverage(int size) {
-        this.data = new LinkedList<>();
-        this.count = size;
+        data = new int[size];
     }
 
     public double next(int val) {
-        data.offer(val);
         sum += val;
-        if (data.size() > count) {
-            sum -= data.poll();
+        sum -= data[head];
+        data[head] = val;
+        head++;
+        if (head == data.length) {
+            head = 0;
         }
-        return ((double) sum) / data.size();
+        if (count < data.length) {
+            count++;
+        }
+        return sum / (double) count;
     }
 }
