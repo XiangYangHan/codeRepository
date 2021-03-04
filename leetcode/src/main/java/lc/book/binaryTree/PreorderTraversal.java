@@ -16,15 +16,16 @@ public class PreorderTraversal {
     public List<Integer> preorderIterationTraversal(TreeNode node) {
         List<Integer> list = new ArrayList<>();
         Deque<TreeNode> deque = new LinkedList<>();
-        deque.push(node);
-        while (!deque.isEmpty()) {
-            TreeNode peek = deque.pop();
-            if (peek == null) {
-                continue;
+        TreeNode n = node;
+        while (n != null || !deque.isEmpty()) {
+            if (n != null) {
+                list.add(n.val);
+                deque.push(n);
+                n = n.left;
+            } else {
+                n = deque.pop();
+                n = n.right;
             }
-            list.add(peek.val);
-            deque.push(peek.right);
-            deque.push(peek.left);
         }
         return list;
     }
