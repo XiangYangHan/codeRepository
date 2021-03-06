@@ -1,6 +1,7 @@
 package lc.book.binaryTree;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Deque;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -55,4 +56,18 @@ public class PostorderTraversal {
         }
     }
 
+    public void postorderIterationTraversal_2(TreeNode root) {
+        TreeNode p = root;
+        Deque<TreeNode> deque = new LinkedList<>();
+        while (p != null || !deque.isEmpty()) {
+            if (p != null) {
+                traversal.add(p.val);
+                deque.push(p);
+                p = p.right;
+            } else {
+                p = deque.pop().left;
+            }
+        }
+        Collections.reverse(traversal);
+    }
 }
