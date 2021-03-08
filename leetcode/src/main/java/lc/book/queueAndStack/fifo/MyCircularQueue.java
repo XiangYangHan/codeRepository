@@ -1,4 +1,4 @@
-package lc.book.queueAndStack;
+package lc.book.queueAndStack.fifo;
 
 public class MyCircularQueue {
     private int[] data;
