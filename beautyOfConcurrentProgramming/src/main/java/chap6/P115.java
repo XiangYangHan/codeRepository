@@ -7,7 +7,7 @@ import java.util.concurrent.locks.LockSupport;
 public class P115 {
 
     public static void main(String[] args) {
-        System.out.println(Reflection.getCallerClass(0));
+//        System.out.println(Reflection.getCallerClass(0));
 
         System.out.println("begin park!");
 
