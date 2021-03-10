@@ -70,63 +70,102 @@ public class NumIslands {
     static int[][] T_R_B_L = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
 
     public int numIslands(char[][] grid) {
-        int num = 0;
-        Set<Coordinate> allCoordinate = new HashSet<>();
-
         int rL = grid.length;
-        for (int row = 0; row < rL; row++) {
-            int cL = grid[row].length;
-            for (int col = 0; col < cL; col++) {
-                if (grid[row][col] == _0) {
+        boolean[][] joined = new boolean[rL][];
+        for (int i = 0; i < rL; i++) {
+            joined[i] = new boolean[grid[i].length];
+        }
+
+        int islandCount = 0;
+        Queue<int[]> queue = new LinkedList<>();
+        for (int r = 0; r < rL; r++) {
+            int cL = grid[r].length;
+            for (int c = 0; c < cL; c++) {
+                if (grid[r][c] == _0) {
                     continue;
                 }
-                Coordinate coordinate = Coordinate.of(row, col);
-                if (allCoordinate.contains(coordinate)) {
+                if (joined[r][c]) {
                     continue;
                 }
-                num++;
-                Queue<Coordinate> queue = new LinkedList<>();
-                allCoordinate.add(coordinate);
-                queue.offer(coordinate);
+                islandCount++;
+                joined[r][c] = true;
+                queue.offer(new int[]{r, c});
                 while (!queue.isEmpty()) {
-                    coordinate = queue.poll();
+                    int[] cur = queue.poll();
+
                     for (int[] trbl : T_R_B_L) {
-                        int r = coordinate.row + trbl[0];
-                        int c = coordinate.col + trbl[1];
-                        if (r < 0 || r == rL || c < 0 || c == cL || grid[r][c] == _0) {
+                        int row = cur[0] + trbl[0];
+                        int col = cur[1] + trbl[1];
+                        if (row < 0 || row == rL || col < 0 || col == cL || grid[row][col] == _0 || joined[row][col]) {
                             continue;
                         }
-                        Coordinate side = Coordinate.of(r, c);
-                        if (allCoordinate.add(side)) {
-                            queue.offer(side);
-                        }
+                        queue.offer(new int[]{row, col});
+                        joined[row][col] = true;
                     }
                 }
             }
         }
-
-        return num;
+        return islandCount;
     }
 
-    static class Coordinate {
-        int row;
-        int col;
+//    public int numIslands(char[][] grid) {
+//        int num = 0;
+//        Set<Coordinate> allCoordinate = new HashSet<>();
+//
+//        int rL = grid.length;
+//        for (int row = 0; row < rL; row++) {
+//            int cL = grid[row].length;
+//            for (int col = 0; col < cL; col++) {
+//                if (grid[row][col] == _0) {
+//                    continue;
+//                }
+//                Coordinate coordinate = Coordinate.of(row, col);
+//                if (allCoordinate.contains(coordinate)) {
+//                    continue;
+//                }
+//                num++;
+//                Queue<Coordinate> queue = new LinkedList<>();
+//                allCoordinate.add(coordinate);
+//                queue.offer(coordinate);
+//                while (!queue.isEmpty()) {
+//                    coordinate = queue.poll();
+//                    for (int[] trbl : T_R_B_L) {
+//                        int r = coordinate.row + trbl[0];
+//                        int c = coordinate.col + trbl[1];
+//                        if (r < 0 || r == rL || c < 0 || c == cL || grid[r][c] == _0) {
+//                            continue;
+//                        }
+//                        Coordinate side = Coordinate.of(r, c);
+//                        if (allCoordinate.add(side)) {
+//                            queue.offer(side);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//        return num;
+//    }
 
-        public static Map<String, Coordinate> map = new HashMap<>();
-
-        public static Coordinate of(int row, int col) {
-            String s = row + "-" + col;
-            Coordinate coordinate = map.get(s);
-            if (coordinate == null) {
-                coordinate = new Coordinate(row, col);
-                map.put(s, coordinate);
-            }
-            return coordinate;
-        }
-
-        public Coordinate(int row, int col) {
-            this.row = row;
-            this.col = col;
-        }
-    }
+//    static class Coordinate {
+//        int row;
+//        int col;
+//
+//        public static Map<String, Coordinate> map = new HashMap<>();
+//
+//        public static Coordinate of(int row, int col) {
+//            String s = row + "-" + col;
+//            Coordinate coordinate = map.get(s);
+//            if (coordinate == null) {
+//                coordinate = new Coordinate(row, col);
+//                map.put(s, coordinate);
+//            }
+//            return coordinate;
+//        }
+//
+//        public Coordinate(int row, int col) {
+//            this.row = row;
+//            this.col = col;
+//        }
+//    }
 }
