@@ -1,4 +1,6 @@
-package lc.book.binaryTree;
+package lc.book.binaryTree.traversal;
+
+import lc.book.binaryTree.TreeNode;
 
 import java.util.ArrayList;
 import java.util.Deque;
