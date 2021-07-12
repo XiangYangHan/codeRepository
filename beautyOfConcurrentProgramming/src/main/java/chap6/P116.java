@@ -21,7 +21,9 @@ public class P116 {
             System.out.println("child thread end park.");
         });
 
+//        LockSupport.unpark(t); // 线程运行前调用unpark 没有作用
         t.start();
+        LockSupport.unpark(t);
 
         Thread.sleep(100);
 
@@ -38,7 +40,8 @@ public class P116 {
         LockSupport.unpark(Thread.currentThread());
 
         LockSupport.park();
-//        LockSupport.park(); // 一次 unpark 只能对应一次 park
+//        LockSupport.unpark(Thread.currentThread());
+//        LockSupport.park();
 
         System.out.println("end park");
     }
