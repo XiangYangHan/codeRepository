@@ -1,5 +1,7 @@
 package chap1;
 
+import java.util.Date;
+
 public class P40_ThreadLocalTest {
 
     static void print(String string) {
@@ -11,6 +13,11 @@ public class P40_ThreadLocalTest {
 
 
     public static void main(String[] args) {
+        System.out.println(new Date());
+        System.out.println(new Date(System.currentTimeMillis()));
+        System.out.println(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000));
+
+
         Thread t1 = new Thread(() -> {
             localVariable.set("t1 local variable.");
 
